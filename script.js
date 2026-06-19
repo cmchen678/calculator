@@ -3,8 +3,6 @@
 let num1;
 let num2;
 let operator;
-const buttons = document.querySelectorAll('.num-btn, .operator-btn');
-const display = document.querySelector('#display');
 
 function add(a, b) {
     return a + b;
