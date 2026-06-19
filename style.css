@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #2d2d30;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    border: 2px solid black;
+}
+
+#display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 48px;
+    height: 75px;
+    width: 100%;
+    border-bottom: 2px solid black;
+    background-color: white;
+}
+
+#btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    background-color: black;
+}
+
+button { 
+    flex: 1 0 calc(25% - 2px);
+    font-size: 24px;
+    border: none;
+}
+
+button:active {
+    opacity: 50%;
+}
+
+.num-btn {
+    aspect-ratio: 1 / 1;
+}
+
+.operator-btn {
+    background-color: orange;
+}
+
+#zero-btn {
+    height: 70px;
+    background-color: aquamarine;
+}
+
+#clear-btn {
+    background-color: lightcoral;
+}
