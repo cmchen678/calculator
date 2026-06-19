@@ -9,6 +9,11 @@ body {
     flex-direction: column;
     width: max-content;
     border: 2px solid black;
+    box-shadow:
+    0 0 5px #fff,       /* Sharp inner core */
+    0 0 10px #ff007f,   /* Small vibrant halo */
+    0 0 20px #ff007f,   /* Medium glow */
+    0 0 40px #ff007f;   /* Large diffuse glow */
 }
 
 #display {
