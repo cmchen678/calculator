@@ -1,6 +1,6 @@
 "use strict";
 
-let num1;
+let num1 = '';
 let num2 = '';
 let operator;
 let result = '';
@@ -8,13 +8,14 @@ let display = document.querySelector('#display');
 const btn = document.querySelectorAll('.num-btn, .operator-btn');
 const numBtn = document.querySelectorAll('.num-btn');
 const operatorBtn = document.querySelectorAll('.operator-btn');
+const decimalBtn = document.querySelector('.decimal-btn');
 const equalsBtn = document.querySelector('#equals-btn');
 const clearBtn = document.querySelector('#clear-btn');
 
 numBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         const pressedBtn = e.target.dataset.num;
-        if (num1 === undefined) {
+        if (num1 === '') {
             num1 = pressedBtn;
             display.textContent = num1;
         } else if (operator !== undefined) {
@@ -23,18 +24,39 @@ numBtn.forEach(button => {
         } else if (num1 === result && operator === undefined) {
             num1 = pressedBtn;
             display.textContent = num1;
-        } else if (num1 !== undefined) {
+        } else if (num1 !== '') {
             num1 += pressedBtn;
             display.textContent = num1;
         }
     })
 })
 
+decimalBtn.addEventListener('click', (e) => {
+    const pressedBtn = e.target.dataset.num;
+    if (num1.toString().includes('.') && operator === undefined) {
+        return;
+    } else if (num2.toString().includes('.')) {
+        return;
+    } else if (num1 === '') {
+        num1 = pressedBtn;
+        display.textContent = num1;
+    } else if (operator !== undefined) {
+        num2 += pressedBtn;
+        display.textContent = `${num1}${operator}${num2}`;
+    } else if (num1 === result && operator === undefined) {
+        num1 = pressedBtn;
+        display.textContent = num1;
+    } else if (num1 !== '') {
+        num1 += pressedBtn;
+        display.textContent = num1;
+    }
+})
+
 operatorBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         const pressedBtn = e.target.dataset.num;
-        if (num1 === undefined) return;
-        else if (num1 !== undefined && operator === undefined && num2 === '') {
+        if (num1 === '') return;
+        else if (num1 !== '' && operator === undefined && num2 === '') {
             operator = pressedBtn;
             display.textContent = `${num1}${operator}`;
         } else if (num1 !== '' && operator !== undefined & num2 !== '') {
@@ -59,7 +81,7 @@ clearBtn.addEventListener('click', () => {
 })
 
 function reset() {
-    num1 = undefined;
+    num1 = '';
     num2 = '';
     operator = undefined;
     result = '';
