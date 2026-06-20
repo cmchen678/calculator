@@ -1,6 +1,6 @@
 "use strict";
 
-let num1 = '';
+let num1;
 let num2 = '';
 let operator;
 let result = '';
@@ -14,38 +14,36 @@ const clearBtn = document.querySelector('#clear-btn');
 numBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         const pressedBtn = e.target.dataset.num;
-        if (num1 === '') {
-            num1 += pressedBtn;
-        } else if (num1 !== '' && operator !== undefined) {
+        if (num1 === undefined) {
+            num1 = pressedBtn;
+            display.textContent = num1;
+        } else if (operator !== undefined) {
             num2 += pressedBtn;
+            display.textContent = `${num1}${operator}${num2}`;
+        } else if (num1 === result && operator === undefined) {
+            num1 = pressedBtn;
+            display.textContent = num1;
+        } else if (num1 !== undefined) {
+            num1 += pressedBtn;
+            display.textContent = num1;
         }
     })
 })
 
 operatorBtn.forEach(button => {
     button.addEventListener('click', (e) => {
-        if (num1 === '') return;
-        else if (num1 !== '' && operator === undefined && num2 === '') {
-            const pressedBtn = e.target.dataset.num;
+        const pressedBtn = e.target.dataset.num;
+        if (num1 === undefined) return;
+        else if (num1 !== undefined && operator === undefined && num2 === '') {
             operator = pressedBtn;
+            display.textContent = `${num1}${operator}`;
         } else if (num1 !== '' && operator !== undefined & num2 !== '') {
             operate(num1, num2, operator);
-            const pressedBtn = e.target.dataset.num;
-            operator = pressedBtn; 
+            operator = pressedBtn;
+            display.textContent = `${num1}${operator}`;
         } else {
-            const pressedBtn = e.target.dataset.num;
-            operator = pressedBtn; 
-        }
-    })
-})
-
-btn.forEach(button => {
-    button.addEventListener('click', (e) => {
-        const pressedBtn = e.target.dataset.num;
-        if (operator === undefined) {
-            display.textContent = num1;
-        } else {
-        display.textContent = `${num1}${operator}${num2}`;
+            operator = pressedBtn;
+            display.textContent = `${num1}${operator}`;
         }
     })
 })
@@ -61,7 +59,7 @@ clearBtn.addEventListener('click', () => {
 })
 
 function reset() {
-    num1 = '';
+    num1 = undefined;
     num2 = '';
     operator = undefined;
     result = '';
@@ -86,8 +84,8 @@ function divide(a, b) {
     return parseFloat(a) / parseFloat(b);
 }
 
-function operate(a, b, operator) {
-    switch (operator) {
+function operate(a, b, op) {
+    switch (op) {
         case '+':
             result = add(a, b);
             break;
@@ -109,5 +107,6 @@ function operate(a, b, operator) {
         display.textContent = result;
         num1 = result;
         num2 = '';
+        operator = undefined;
     }
 }
