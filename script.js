@@ -11,6 +11,7 @@ const operatorBtn = document.querySelectorAll('.operator-btn');
 const decimalBtn = document.querySelector('.decimal-btn');
 const equalsBtn = document.querySelector('#equals-btn');
 const clearBtn = document.querySelector('#clear-btn');
+const backspaceBtn = document.querySelector('.backspace-btn');
 
 numBtn.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -78,6 +79,26 @@ equalsBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => {
     display.textContent = '0';
     reset();
+})
+
+backspaceBtn.addEventListener('click', () => {
+    if (num1 === '') {
+        return;
+    } else if (num1.toString().length === 1) {
+        num1 = '';
+        display.textContent = '0';
+    } else if (num1 === result && operator === undefined) {
+        return;
+    } else if (num1 !== '' && operator === undefined) {
+        num1 = num1.toString().slice(0, -1);
+        display.textContent = num1;
+    } else if (operator !== undefined && num2 === '') {
+        operator = undefined;
+        display.textContent = num1;
+    } else {
+        num2 = num2.toString().slice(0, -1);
+        display.textContent = `${num1}${operator}${num2}`;
+    }
 })
 
 function reset() {
