@@ -14,7 +14,7 @@ const clearBtn = document.querySelector('#clear-btn');
 numBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         const pressedBtn = e.target.dataset.num;
-        if (num1 === '' || operator === undefined) {
+        if (num1 === '') {
             num1 += pressedBtn;
         } else if (num1 !== '' && operator !== undefined) {
             num2 += pressedBtn;
@@ -25,8 +25,17 @@ numBtn.forEach(button => {
 operatorBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         if (num1 === '') return;
-        const pressedBtn = e.target.dataset.num;
-        operator = pressedBtn;
+        else if (num1 !== '' && operator === undefined && num2 === '') {
+            const pressedBtn = e.target.dataset.num;
+            operator = pressedBtn;
+        } else if (num1 !== '' && operator !== undefined & num2 !== '') {
+            operate(num1, num2, operator);
+            const pressedBtn = e.target.dataset.num;
+            operator = pressedBtn; 
+        } else {
+            const pressedBtn = e.target.dataset.num;
+            operator = pressedBtn; 
+        }
     })
 })
 
